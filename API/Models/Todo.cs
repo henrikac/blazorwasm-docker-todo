@@ -11,7 +11,7 @@ namespace API.Models
         [MaxLength(80)]
         public string Title { get; set; }
 
-        public DateTime CreatedAt { get; set; }
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
         public DateTime? CompletedAt { get; set; }
     }
