@@ -1,6 +1,19 @@
 version: "3.9"
 
 services:
+  api:
+    container_name: todo_api
+    build:
+      context: ./API
+      dockerfile: Dockerfile
+    ports:
+      - "5000:80"
+      - "5001:443"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development # only set to get swagger
+    depends_on:
+      - migrations
+      - db
   db:
     image: postgres
     container_name: todos
@@ -13,3 +26,9 @@ services:
       - POSTGRES_PASSWORD=postgres
     ports:
       - "5432:5432"
+    depends_on:
+      - migrations
+  migrations:
+    build:
+      context: ./API
+      dockerfile: Migrations.Dockerfile
