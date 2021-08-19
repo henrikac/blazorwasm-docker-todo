@@ -35,6 +35,15 @@ namespace API
 
             services.AddAutoMapper(typeof(TodoProfile));
 
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: "allowAll", builder =>
+                {
+                    builder.AllowAnyOrigin()
+                        .AllowAnyMethod();
+                });
+            });
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -57,6 +66,8 @@ namespace API
             }
 
             app.UseRouting();
+
+            app.UseCors("allowAll");
 
             app.UseAuthorization();
 
