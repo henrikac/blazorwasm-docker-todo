@@ -1,0 +1,9 @@
+.styled-text-input {
+    padding: 0.6rem 1rem;
+    font-size: 1.2rem;
+    border: none;
+}
+
+.styled-text-input:focus {
+    outline: none;
+}
