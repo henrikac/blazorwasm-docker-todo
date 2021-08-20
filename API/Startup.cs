@@ -37,10 +37,11 @@ namespace API
 
             services.AddCors(options =>
             {
-                options.AddPolicy(name: "allowAll", builder =>
+                options.AddDefaultPolicy(builder =>
                 {
                     builder.AllowAnyOrigin()
-                        .AllowAnyMethod();
+                        .AllowAnyMethod()
+                        .AllowAnyHeader();
                 });
             });
 
@@ -67,7 +68,7 @@ namespace API
 
             app.UseRouting();
 
-            app.UseCors("allowAll");
+            app.UseCors();
 
             app.UseAuthorization();
 
