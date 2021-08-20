@@ -1,0 +1,20 @@
+@using Models
+
+<div id="todo-box">
+    <h2 class="box-headline">Todo</h2>
+
+    @* TODO: Create custom EditForm component *@
+    <EditForm Model="@todo" OnValidSubmit="@HandleValidSubmit" style="max-width:400px;margin:0 auto;">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <StyledInputText @bind-Value="todo.Title" />
+
+        <button type="submit" class="add-todo-btn">Add</button>
+    </EditForm>
+
+    @foreach (Todo todo in todos)
+    {
+        <TodoItem Title="@todo.Title" />
+    }
+</div>
