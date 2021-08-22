@@ -1,7 +1,7 @@
 using System;
-using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
+using UI.Services;
 
 namespace UI.Components
 {
@@ -16,25 +16,8 @@ namespace UI.Components
         [Parameter]
         public EventCallback<int> OnDeleteCallback { get; set; }
 
-        [Inject]
-        private HttpClient Http { get; set; }
-
         private async Task DeleteTodo()
         {
-            HttpRequestMessage request = new HttpRequestMessage()
-            {
-                Method = HttpMethod.Delete,
-                RequestUri = new Uri($"http://localhost:5000/api/todos/{Id}"),
-            };
-
-            using var response = await Http.SendAsync(request);
-
-            if (!response.IsSuccessStatusCode)
-            {
-                Console.WriteLine("Error happened deleting todo");
-                return;
-            }
-
             await OnDeleteCallback.InvokeAsync(Id);
         }
     }
