@@ -15,6 +15,6 @@
 
     @foreach (Todo todo in todos)
     {
-        <TodoItem Title="@todo.Title" />
+        <TodoItem Id="@todo.Id" Title="@todo.Title" OnDeleteCallback="@RemoveTodo" />
     }
 </div>

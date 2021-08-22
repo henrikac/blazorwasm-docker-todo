@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Json;
+using System.Linq;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -52,6 +53,19 @@ namespace UI.Components
 
             Todo newTodo = await response.Content.ReadFromJsonAsync<Todo>();
             todos.Add(newTodo);
+        }
+
+        private void RemoveTodo(int id)
+        {
+            Todo todo = todos.FirstOrDefault(t => t.Id == id);
+
+            if (todo is null)
+            {
+                Console.WriteLine($"Could not find todo with id: {id}");
+                return;
+            }
+
+            todos.Remove(todo);
         }
     }
 }
